@@ -1,8 +1,13 @@
 package com.example.loginfirebase;
+import android.net.Uri;
+
 import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class User {
     public String name, email;
+    String uid, phoneno;
+    Uri photourl;
+    boolean anonymous;
     public User()
     {
     }
@@ -10,6 +15,15 @@ public class User {
     public User(String name, String email) {
         this.name = name;
         this.email = email;
+    }
+
+    public User(String name, String email, String uid, String phoneno, Uri photourl, boolean anonymous) {
+        this.name = name;
+        this.email = email;
+        this.uid = uid;
+        this.phoneno = phoneno;
+        this.photourl = photourl;
+        this.anonymous = anonymous;
     }
 
     public String getName() {
@@ -26,5 +40,37 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public String getPhoneno() {
+        return phoneno;
+    }
+
+    public void setPhoneno(String phoneno) {
+        this.phoneno = phoneno;
+    }
+
+    public Uri getPhotourl() {
+        return photourl;
+    }
+
+    public void setPhotourl(Uri photourl) {
+        this.photourl = photourl;
+    }
+
+    public boolean isAnonymous() {
+        return anonymous;
+    }
+
+    public void setAnonymous(boolean anonymous) {
+        this.anonymous = anonymous;
     }
 }

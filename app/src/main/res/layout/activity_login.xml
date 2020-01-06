@@ -29,7 +29,14 @@
             android:hint="Enter Email"
             android:inputType="textEmailAddress"
             android:maxLines="1"/>
-
+        <TextView
+            android:id="@+id/tv_error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:text=""
+            android:background="#ccddcc"/>
         <Button
             android:id="@+id/btn_save2"
             android:layout_width="match_parent"
