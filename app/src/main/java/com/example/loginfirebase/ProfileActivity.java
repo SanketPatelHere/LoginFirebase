@@ -89,7 +89,10 @@ public class ProfileActivity extends AppCompatActivity {
         photourl = user.getPhotoUrl();
         userId = name;  //mobile no
 
-        User user1 = new User(name, email);
+        //registration create time
+        long createdtime = System.currentTimeMillis();  //last login time
+        long lastlogintime = System.currentTimeMillis();  //last login time
+        User user1 = new User(name, email, createdtime, lastlogintime);
         //User user1 = new User(name, email, uid, phoneno, photourl, anonymous);
         lst = new ArrayList<>();
         lst.add(user1);
@@ -107,8 +110,10 @@ public class ProfileActivity extends AppCompatActivity {
             Log.i("My fetchlist size = ",fetchList.size()+"");
             Log.i("My fetchlist = ",fetchList+"");
             lst = fetchList;
-            Log.i("My lst size = ",lst.size()+"");
-            Log.i("My lst name = ",lst.get(0).getName()+"");
+            Log.i("My lst size = ",lst.size()+"");  //1
+            Log.i("My lst name = ",lst.get(0).getName()+"");  //elluminati11
+            Log.i("My lst created time = ",lst.get(0).getCreatedtime()+""); //1578372115674
+            Log.i("My lst lastlogintime = ",lst.get(0).getLastlogintime()+""); //1578372115674
             Toast.makeText(this, "Data saved in sp", Toast.LENGTH_SHORT).show();
         }
 
@@ -119,21 +124,11 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        mFirebaseDatabase.child("users").child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+        mFirebaseDatabase.child("users").child(userId).child("lastlogintime").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Log.i("My response profile = ",dataSnapshot+"");
-                if(dataSnapshot.exists())  //name
-                {
-                    //update
-                    Toast.makeText(ProfileActivity.this, "Name already exist", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    //add
-                    //createUser(name, email);  //empty = add, in future register
-
-                }
+                Toast.makeText(ProfileActivity.this, "Time changed", Toast.LENGTH_SHORT).show();
             }
 
             @Override

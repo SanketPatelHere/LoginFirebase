@@ -8,6 +8,8 @@ public class User {
     String uid, phoneno;
     Uri photourl;
     boolean anonymous;
+    long createdtime;
+    long lastlogintime;
     public User()
     {
     }
@@ -17,7 +19,24 @@ public class User {
         this.email = email;
     }
 
+    public User(String name, String email, long createdtime, long lastlogintime) {
+        this.name = name;
+        this.email = email;
+        this.createdtime = createdtime;
+        this.lastlogintime = lastlogintime;
+    }
+
+
     public User(String name, String email, String uid, String phoneno, Uri photourl, boolean anonymous) {
+        this.name = name;
+        this.email = email;
+        this.uid = uid;
+        this.phoneno = phoneno;
+        this.photourl = photourl;
+        this.anonymous = anonymous;
+    }
+
+    public User(String name, String email, String uid, String phoneno, Uri photourl, boolean anonymous, long time) {
         this.name = name;
         this.email = email;
         this.uid = uid;
@@ -73,4 +92,22 @@ public class User {
     public void setAnonymous(boolean anonymous) {
         this.anonymous = anonymous;
     }
+
+
+    public long getCreatedtime() {
+        return createdtime;
+    }
+
+    public void setCreatedtime(long createdtime) {
+        this.createdtime = createdtime;
+    }
+
+    public long getLastlogintime() {
+        return lastlogintime;
+    }
+
+    public void setLastlogintime(long lastlogintime) {
+        this.lastlogintime = lastlogintime;
+    }
+
 }
