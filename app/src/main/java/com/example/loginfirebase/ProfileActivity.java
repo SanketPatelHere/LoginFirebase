@@ -28,6 +28,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class ProfileActivity extends AppCompatActivity {
     ImageView imageView;
     TextView textName, textEmail;
@@ -42,6 +44,7 @@ public class ProfileActivity extends AppCompatActivity {
     Uri photourl;
     boolean anonymous;
     PreferenceHelper myPref;
+    ArrayList<User> lst;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,8 +88,30 @@ public class ProfileActivity extends AppCompatActivity {
         phoneno = user.getPhoneNumber();
         photourl = user.getPhotoUrl();
         userId = name;  //mobile no
+
         User user1 = new User(name, email);
         //User user1 = new User(name, email, uid, phoneno, photourl, anonymous);
+        lst = new ArrayList<>();
+        lst.add(user1);
+        myPref.saveArrayList(lst,"users");  //for save data in sp
+
+        //for get data from sp
+        if(myPref.getArrayList("users")==null)
+        {
+            Log.i("My Error in pref = ","not change list");
+            Toast.makeText(this, "Data not saved in sp", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            ArrayList<User> fetchList = myPref.getArrayList("users");
+            Log.i("My fetchlist size = ",fetchList.size()+"");
+            Log.i("My fetchlist = ",fetchList+"");
+            lst = fetchList;
+            Log.i("My lst size = ",lst.size()+"");
+            Log.i("My lst name = ",lst.get(0).getName()+"");
+            Toast.makeText(this, "Data saved in sp", Toast.LENGTH_SHORT).show();
+        }
+
         mFirebaseDatabase.child("users").child(userId).setValue(user1).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
